@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Write your title here... </title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <script src="jquery-3.2.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black|Questrial" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <img src="derLogo.png" id="logoImg" style="z-index:5"/>
+    <center>
+    <div class="overlay"></div>
+    <!--/DARK OVERLAY-->
+
+    <!--WRAP-->
+    <div id="wrap">
+        <!--CONTAINER-->
+        <div class="contain">
+            <div id="logo"><b>SERIES <span style="color:rgba(0,0,0,0.5)">HOURS</span></b></div>
+            <div id="sublogo">"Aren't you glad you finally found us? We shall help you with your show planning forward."</div>
+            <center>
+            <form action="upload" method="post" autocomplete="off">
+                <input type="text" id="val" name="val" placeholder="Enter the the time in minutes..."/>
+                <button type="submit">Query</button>
+            </form>
+        </div>
+    </div>
+    </center>
+    <script src="script.js"></script>
+</body>
+
+</html>

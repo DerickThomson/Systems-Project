@@ -1,0 +1,125 @@
+body{
+    background-image: url('./bg1.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+.overlay{
+	background:rgba(2,33,64,.8);
+	position:absolute;
+	left:0;
+	top:0;
+	bottom:0;
+	right:0;
+	width:100%;
+	z-index:1;
+	overflow:hidden;
+}
+
+@media (min-width: 1200px){
+	.contain {
+		width:100%;
+	}
+}
+
+#wrap{
+	width:100%;
+	height:100vh;
+	display:table;
+	position:relative;
+	z-index:2;
+}
+#logoImg{
+    width: 100px;
+    margin-left:20px;
+}
+#logo{
+    font-family: 'Questrial', sans-serif;
+    font-size: 80px;
+    color:rgba(255,255,255,0.5);
+    padding: 20px; 
+    width: 60%;
+    margin-top: 5%;
+}
+#sublogo{
+    font-family: 'Questrial', sans-serif;
+    font-size: 30px;
+    width: 65%;
+    color:rgba(255,255,255,0.5);
+}
+#val{
+    text-align: right;
+    color:#78a1c7;
+    background-color: rgba(0,0,0,0);
+    border-style: none;
+    border-bottom-style: solid;
+    width: 60%;
+    font-size: 30px;
+    border-bottom-color: #265077;
+}
+#val::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #f8f8ff;
+    font-family: 'Questrial', sans-serif;
+    opacity: 0.5;
+}
+#val:focus{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+form{
+    position: absolute;
+    bottom: 170px;
+    width: 100%;
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+button{
+    font-family: 'Questrial', sans-serif;
+    background-color: rgba(0,0,0,0);
+    color: rgba(255,255,255,.4);
+    border: none;
+    width: 120px;
+    height: 55px;
+    font-size: 30px;
+    padding: 0;
+    margin: auto;
+    border-radius: 30px;
+    border: solid;
+    border-color: #265077;
+    margin-left: 1%;    
+    border-width: 2px;
+}
+button:hover{
+    background-color: #265077;
+}
+
+@media only screen and (max-width: 1000px) {
+    #logo{
+        font-size:45px;
+        margin-top: 15%;
+        width: 70%;
+    }
+    #sublogo{
+        font-size: 20px;
+        width: 90%;
+    }
+    #logoImg{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 150px;
+        margin-top:50px;
+    }
+    form{
+        bottom:220px;
+        width: 100%;
+    }
+    #val{
+        font-size:16px;
+    }
+}

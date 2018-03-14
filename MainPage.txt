@@ -1,0 +1,9 @@
+<html>
+<head>
+<title>What Do I Watch?</title>
+</head>
+<body>
+Enter the number hours you have to spare:
+<input type="text">
+</body>
+</html>

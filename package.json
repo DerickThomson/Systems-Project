@@ -1,0 +1,14 @@
+{
+    "name": "SystemProject",
+    "main": "./index.js",
+    "scripts": {
+        "start": "node. /index.js"
+    },
+    "dependencies": {
+        "body-parser": "^1.18.2",
+        "express": "4.16.2"
+    },
+    "engines": {
+        "node": "8.8.0"
+    }
+}
