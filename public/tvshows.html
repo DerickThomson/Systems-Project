@@ -8,9 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link href='tvstyles.css' rel='stylesheet' />
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black|Questrial" rel="stylesheet">
 </head>
 
 <body>
+    <div id="navbar">
+        <div id="logo"><img src="pics/FullLogo.png"/></div>
+        <center>
+            <form action="upload" method="post" autocomplete="off">
+                <input type="text" id="val" name="val" placeholder="Enter the the time in minutes..."/>
+                <button type="submit"><span>query<span></button>
+            </form>
+        </center>
+    </div>
     <div id='main'>
         <div class="container">
             <div id='shows'>
@@ -29,7 +39,7 @@
             var cards = document.getElementById("shows");
             var i = 0;
             while(myList[i]!=null){
-                cards.innerHTML+="<div class='card'><img src='img.jpg'/><div class='cardName'>"+myList[i].name+"</div></div>";
+                cards.innerHTML+="<div class='card'><img src='pics/"+(myList[i]["s no."]-1)+".jpg'/><div class='cardName'><b>"+myList[i].show+"</b></div></div>";
                 i++;
             }
         }

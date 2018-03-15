@@ -1,33 +1,106 @@
 body{
-    background-image: url('./bg1.jpg');
+    background-image: url('./pics/bg.jpg');
+    background-color: #fdfdfd;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: 'Questrial', sans-serif;
 }
 .container{
-    width:90%;
-    margin-left: 7%;
-    margin-right: 5%;
+    width:65%;
+    margin-left: 17.5%;
+    margin-right: 17.5%;
+}
+#shows{
+    margin-top: 20%;
 }
 .card{
     display: inline-block;
-    height: 350px;
-    width: 400px;
+    height: 300px;
+    width: 100%;
     background-color: #fdfdfd;
-    border-radius: 5px; 
-    margin-left:10px;
-    margin-right: 10px;
-    margin-bottom: 30px;
+    border-radius: 3px;
+    margin-bottom: 20px;
     text-align: right;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    color:#222;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .card img{
-    width: 100%;
+    height: 95%;
+    width: 35%;
+    float: left;
+    padding: 5px;
+    border-radius: 8px;
 }
 .cardName{
-    text-align: center;
+    text-align: left;
     font-size: 20px;
-    margin-left:5%;
-    margin-right: 5%;
+    margin-top: 6%;
+    margin-left: 40%;
+}
+#navbar{
+    height: 80px;
+    background:#624f39;
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+#logo img{
+    float: left;
+    width:250px;
+    margin-top: 10px;
+    margin-left:20px;
+}
+#val{
+    text-align: right;
+    color:rgba(170,120,15,1);
+    background-color: #ac9477;
+    border-style: none;
+    border-style: solid;
+    width: 40%;
+    height: 35px;
+    font-size: 17px;
+    border-color: #ac9477;
+    border-bottom-left-radius:50px;
+    border-top-left-radius: 50px;
+}
+form{
+    margin-left:0px;
+    margin-top:20px;
+}
+button{
+    font-family: 'Questrial', sans-serif;
+    background-color: rgba(0,0,0,0);
+    color: rgba(255,255,255,.4);
+    padding: 1;
+    border: none;
+    width: 70px;
+    height: 41px;
+    font-size: 17px;
+    padding: 0;
+    border-radius: 0px;
+    border: solid 2px;
+    border-color: #ac9477;
+    margin-left: -4px;    
+    border-width: 2;
+    text-align: left;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+button span{
+    margin-left: 9px;
+}
+button:hover{
+    background-color: #ac9477;
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
 }
