@@ -8,43 +8,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link href='tvstyles.css' rel='stylesheet' />
-    <link href="https://fonts.googleapis.com/css?family=Archivo+Black|Questrial" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
 </head>
 
 <body>
     <div id="navbar">
-        <div id="logo"><img src="pics/FullLogo.png"/></div>
+        <div id="logo"><img src="pics/FullLogo.png" /></div>
         <center>
             <form action="upload" method="post" autocomplete="off">
-                <input type="text" id="val" name="val" placeholder="Enter the the time in minutes..."/>
+                <input type="text" id="val" name="val" placeholder="Enter the hours you're free a day..." />
                 <button type="submit"><span>query<span></button>
             </form>
         </center>
     </div>
     <div id='main'>
         <div class="container">
+            <center>
+                <!--div id="filter">
+                    <form action="filter" method="post">
+                        <select>
+                            <option value="" disabled selected> Season</option>
+                            <option value=""> none </option>
+                            <option value="1"> One </option>
+                            <option value="all"> All </option>
+                        </select>
+                    </form>
+                </div-->
+                <p id="none"></p>
+            </center>
             <div id='shows'>
 
             </div>
         </div>
     </div>
 </body>
-<script>
-    var myList;
-    $.ajax({
-        url: '/upload',
-        complete: function (data) {
-            myList = data.responseJSON;
-            //console.log(myList);
-            var cards = document.getElementById("shows");
-            var i = 0;
-            while(myList[i]!=null){
-                cards.innerHTML+="<div class='card'><img src='pics/"+(myList[i]["s no."]-1)+".jpg'/><div class='cardName'><b>"+myList[i].show+"</b></div></div>";
-                i++;
-            }
-        }
-    })
-
-</script>
-
+<script src="script.js"></script>
 </html>

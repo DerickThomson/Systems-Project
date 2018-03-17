@@ -4,18 +4,10 @@ var url = require('url');
 var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser());
-var value, l;
+var value, l, min, val;
 
-var query = function (value) {
-    var i = 0;
-    var list = [];
-    while (i < 74) {
-        if (parseInt(tv[i]["total time (min)"]) <= parseInt(value)) {
-            list.push({ name: tv[i].show, pic: tv[i]["s no."] });
-        }
-        i++;
-    }
-    return list;
+var hourToMin = function(min){
+    return ((parseInt(min)*60)*7);
 }
 
 // Our first route
@@ -41,8 +33,8 @@ mongo.connect('mongodb://127.0.0.1:27017/tvShows', function (err, db) {
     })
     app.post('/upload', function (req, res) {
         value = req.body.val;
-        //l = query(value);
-        tvS.find({"total time (min)": {$lt: parseInt(value)}}).toArray(function(err, res){
+        val = hourToMin(value);
+        tvS.find({"total time (min)": {$lt: val}}).toArray(function(err, res){
             l=res;
         });
         //res.send(l);
@@ -64,7 +56,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "13",
         "total time (min)": 650,
-        "_id": "5aaa0cd693da2631e0c0e92f"
+        "decription": "Newcomer Katherine Langford plays the role of Hannah, a young woman who takes her own life. Two weeks after her tragic death, a classmate named Clay finds a mysterious box on his porch. Inside the box are recordings made by Hannah -- on whom Clay had a crush -- in which she explains the 13 reasons why she chose to commit suicide. If Clay decides to listen to the recordings, he will find out if and how he made the list. This intricate and heart-wrenching tale is told through Clay and Hannah's dual narratives.",
+        "rating": "9.3",
+        "_id": "5aac8b2fa120571180f0cc8d"
     },
     {
         "": "",
@@ -75,7 +69,9 @@ var tv = [
         "no. of seasons": "4",
         "total episodes": "88",
         "total time (min)": 3520,
-        "_id": "5aaa0cd693da2631e0c0e930"
+        "decription": "Agent Phil Coulson leads a team of highly skilled agents from the global law-enforcement organisation known as S.H.I.E.L.D. Together, they combat extraordinary and inexplicable threats.",
+        "rating": "9.1",
+        "_id": "5aac8b2fa120571180f0cc8e"
     },
     {
         "": "",
@@ -86,7 +82,9 @@ var tv = [
         "no. of seasons": "6",
         "total episodes": "138",
         "total time (min)": 5520,
-        "_id": "5aaa0cd693da2631e0c0e931"
+        "decription": "After mastering the skill of archery on a deserted island, multi-millionaire playboy Oliver Queen returns to his city to take on the vigilante persona of Arrow to fight crime and corruption.",
+        "rating": "8",
+        "_id": "5aac8b2fa120571180f0cc8f"
     },
     {
         "": "",
@@ -97,7 +95,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "10",
         "total time (min)": 450,
-        "_id": "5aaa0cd693da2631e0c0e932"
+        "decription": "Nicole Brown Simpson and her pal Ronald Goldman, a waiter, are killed at her home in Brentwood, LA. The cops nab OJ Simpson, a retired US footballer and ex-husband of Nicole. His murder trial begins.",
+        "rating": "9.1",
+        "_id": "5aac8b2fa120571180f0cc90"
     },
     {
         "": "",
@@ -108,7 +108,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "8",
         "total time (min)": 440,
-        "_id": "5aaa0cd693da2631e0c0e933"
+        "decription": "Ex-convict Shadow Moon roams a world he doesn't understand, left adrift by the recent, tragic death of his wife. Little does he know his life is about to change after he meets a crafty, charismatic con man named Mr. Wednesday, who offers Shadow a job as his bodyguard. As their journey begins, Shadow encounters a hidden America where magic is real and fear grows over the ascending power of New Gods like Technology and Media. In a grand plan to combat the threat, Mr. Wednesday attempts to unite the Old Gods to defend their existence and rebuild the influence that they've lost, leaving Shadow struggling to accept this new world and his place in it.",
+        "rating": "8.8",
+        "_id": "5aac8b2fa120571180f0cc91"
     },
     {
         "": "",
@@ -119,7 +121,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "12",
         "total time (min)": 240,
-        "_id": "5aaa0cd693da2631e0c0e934"
+        "decription": "The story focuses on a boy named Kōichi Sakakibara who, upon transferring into Yomiyama Middle School and meeting the curious Mei Misaki, finds himself in a mystery revolving around students and people related to his class falling victim to gruesome, senseless deaths.",
+        "rating": "8.7",
+        "_id": "5aac8b2fa120571180f0cc92"
     },
     {
         "": "",
@@ -130,7 +134,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "10",
         "total time (min)": 600,
-        "_id": "5aaa0cd693da2631e0c0e935"
+        "decription": "More than 300 years in the future, society has been transformed by new technology, leading to human bodies being interchangeable and death no longer being permanent. Takeshi Kovacs is the only surviving soldier of a group of elite interstellar warriors who were defeated in an uprising against the new world order. His mind was imprisoned for centuries until impossibly wealthy businessman Laurens Bancroft offers him the chance to live again. Kovacs will have to do something for Bancroft, though, if he wants to be resurrected. Bancroft's request of Kovacs is to solve a murder -- Bancroft's.",
+        "rating": "8.6",
+        "_id": "5aac8b2fa120571180f0cc93"
     },
     {
         "": "",
@@ -141,7 +147,9 @@ var tv = [
         "no. of seasons": "3",
         "total episodes": "60",
         "total time (min)": 1200,
-        "_id": "5aaa0cd693da2631e0c0e936"
+        "decription": "Aang, a 12-year-old boy, must put his childhood aside to impede chaos that the Fire nation is creating. He embarks on a quest to restore harmony in the worlds of Water, Earth and Air nations.",
+        "rating": "9.2",
+        "_id": "5aac8b2fa120571180f0cc94"
     },
     {
         "": "",
@@ -152,7 +160,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "37",
         "total time (min)": 740,
-        "_id": "5aaa0cd693da2631e0c0e937"
+        "decription": "It is set in a world where humanity lives in cities surrounded by enormous walls; a defense against the Titans, gigantic humanoids that eat humans seemingly without reason. The story initially centers on Eren Yeager and his childhood friends Mikasa Ackerman and Armin Arlert, who join the military to fight the Titans after their hometown is invaded and Eren's mother is eaten and Eren swears to avenge her.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0cc95"
     },
     {
         "": "",
@@ -163,7 +173,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "8",
         "total time (min)": 400,
-        "_id": "5aaa0cd693da2631e0c0e938"
+        "decription": "This series follows the tragic tale of three orphans -- Violet, Klaus, and Sunny Baudelaire -- who are investigating their parents' mysterious death. The siblings are saddled with an evil guardian named Count Olaf, who will do whatever it takes to get his hands on the Baudelaire's inheritance. Violet, Klaus, and Sunny must outsmart Olaf at every turn, foiling devious plans and disguises.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0cc96"
     },
     {
         "": "",
@@ -174,7 +186,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "8",
         "total time (min)": 440,
-        "_id": "5aaa0cd693da2631e0c0e939"
+        "decription": "Madeline, Celeste and Jane are a trio of wealthy young women in Monterey, California. Their lives are shattered when a murder takes place in their idyllic town, unravelling a can of worms.",
+        "rating": "9.1",
+        "_id": "5aac8b2fa120571180f0cc97"
     },
     {
         "": "",
@@ -185,7 +199,9 @@ var tv = [
         "no. of seasons": "5",
         "total episodes": "115",
         "total time (min)": 2300,
-        "_id": "5aaa0cd693da2631e0c0e93a"
+        "decription": "Jake Peralta, a talented detective, along with his diverse but carefree team, struggles when a new commanding officer, Ray Holt, is appointed to their precinct.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0cc98"
     },
     {
         "": "*",
@@ -196,7 +212,9 @@ var tv = [
         "no. of seasons": "4",
         "total episodes": "19",
         "total time (min)": 950,
-        "_id": "5aaa0cd693da2631e0c0e93b"
+        "decription": "An anthology series that revolves around a group of people's personal lives and how technology manipulates their behaviour.",
+        "rating": "9.4",
+        "_id": "5aac8b2fa120571180f0cc99"
     },
     {
         "": "",
@@ -207,7 +225,9 @@ var tv = [
         "no. of seasons": "3",
         "total episodes": "30",
         "total time (min)": 1350,
-        "_id": "5aaa0cd693da2631e0c0e93c"
+        "decription": "Ex-con artist Jimmy McGill turns into a small-time attorney and goes through a series of trials and tragedies, as he transforms into his alter ego Saul Goodman, a morally challenged criminal lawyer.",
+        "rating": "9.2",
+        "_id": "5aac8b2fa120571180f0cc9a"
     },
     {
         "": "",
@@ -218,7 +238,9 @@ var tv = [
         "no. of seasons": "4",
         "total episodes": "48",
         "total time (min)": 1200,
-        "_id": "5aaa0cd693da2631e0c0e93d"
+        "decription": "A humanoid horse, BoJack Horseman -- lost in a sea of self-loathing and booze -- decides it's time for a comeback. Once the star of a '90s sitcom, in which he was the adoptive father of three orphaned kids (two girls and a boy). The show was the hottest thing around, then suddenly, was canceled. Now 18 years later, BoJack wants to regain his dignity. With the aid of a human sidekick and a feline ex-girlfriend who is his agent, he sets out to make it happen. But Hollywood is vastly different from those days, and getting used to stuff like Twitter may take some time.",
+        "rating": "9.1",
+        "_id": "5aac8b2fa120571180f0cc9b"
     },
     {
         "": "*",
@@ -229,7 +251,9 @@ var tv = [
         "no. of seasons": "5",
         "total episodes": "62",
         "total time (min)": 3410,
-        "_id": "5aaa0cd693da2631e0c0e93e"
+        "decription": "Walter White, a chemistry teacher, discovers that he has cancer and decides to get into the meth-making business to repay his medical debts. His priorities begin to change when he partners with Jesse.",
+        "rating": "10",
+        "_id": "5aac8b2fa120571180f0cc9c"
     },
     {
         "": "",
@@ -240,7 +264,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "4",
         "total time (min)": 80,
-        "_id": "5aaa0cd693da2631e0c0e93f"
+        "decription": "Inspired by the classic video game series, the last survivor of a disgraced clan battles Dracula.",
+        "rating": "8.8",
+        "_id": "5aac8b2fa120571180f0cc9d"
     },
     {
         "": "",
@@ -251,7 +277,9 @@ var tv = [
         "no. of seasons": "2",
         "total episodes": "26",
         "total time (min)": 1430,
-        "_id": "5aaa0cd693da2631e0c0e940"
+        "decription": "\"Daredevil\" follows Matt Murdock, attorney by day and vigilante by night. Blinded in an accident as a child, Murdock uses his heightened senses as Daredevil to fight crime on the streets of New York after the sun goes down. While Murdock's day job requires him to believe in the criminal justice system, his alter ego does not follow suit, leading him to take the law into his own hands to protect his Hell's Kitchen neighborhood and the surrounding communities.",
+        "rating": "9.1",
+        "_id": "5aac8b2fa120571180f0cc9e"
     },
     {
         "": "",
@@ -262,7 +290,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "10",
         "total time (min)": 250,
-        "_id": "5aaa0cd693da2631e0c0e941"
+        "decription": "Akira's best friend tells him that ancient demons have returned to take back the world from humans and suggests that he unite with a demon. Akira successfully does that, transforming into Devilman, a being with a demon's powers but who retains the soul of a human. This sends Akira into a brutal, degenerate war against evil. With fear of demons gripping the world, humanity devolves into paranoia and violence and Akira sets out to save other demon-human hybrids like himself.",
+        "rating": "8.8",
+        "_id": "5aac8b2fa120571180f0cc9f"
     },
     {
         "": "",
@@ -273,7 +303,9 @@ var tv = [
         "no. of seasons": "10",
         "total episodes": "120",
         "total time (min)": 4800,
-        "_id": "5aaa0cd693da2631e0c0e942"
+        "decription": "The programme depicts the adventures of a Time Lord called \"the Doctor\", an extraterrestrial being from the planet Gallifrey. The Doctor explores the universe in a time-travelling space ship called the TARDIS.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0cca0"
     },
     {
         "": "",
@@ -284,7 +316,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "8",
         "total time (min)": 280,
-        "_id": "5aaa0cd693da2631e0c0e943"
+        "decription": "Alison Brie stars as Ruth Wilder, an out-of-work actress living in Los Angeles in the '80s. Wilder finds an unexpected chance at stardom: enter the glitter and spandex-laden world of women's wrestling, where she must work alongside 12 other Hollywood misfits.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0cca1"
     },
     {
         "": "*",
@@ -295,7 +329,9 @@ var tv = [
         "no. of seasons": "2",
         "total episodes": "40",
         "total time (min)": 800,
-        "_id": "5aaa0cd693da2631e0c0e944"
+        "decription": "Twin siblings Dipper and Mabel are sent to a mysterious town of Gravity Falls in Oregon for their summer vacations. But things are not as they seem and soon the duo must unravel a series of mysteries.",
+        "rating": "9.2",
+        "_id": "5aac8b2fa120571180f0cca2"
     },
     {
         "": "",
@@ -306,7 +342,9 @@ var tv = [
         "no. of seasons": "3",
         "total episodes": "30",
         "total time (min)": 1650,
-        "_id": "5aaa0cd693da2631e0c0e945"
+        "decription": "Lester Nygaard, an insurance salesman, lives a life of monotony with his uninteresting wife. He meets Lorne Malvo who convinces him to tag along in search of a killer.",
+        "rating": "9.3",
+        "_id": "5aac8b2fa120571180f0cca3"
     },
     {
         "": "",
@@ -317,7 +355,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "13",
         "total time (min)": 715,
-        "_id": "5aaa0cd693da2631e0c0e946"
+        "decription": "When Danny Rand was 10-years old, he survived a mysterious plane crash that claimed the lives of his extremely wealthy parents. Rescued by warrior monks, Danny grew up in the of city of K'un-Lun, where he endured harsh conditions, but also trained to be a fierce warrior. Years later, Danny returns home to New York, where he wants to reconnect with his past and take his rightful place at his family's company.",
+        "rating": "7",
+        "_id": "5aac8b2fa120571180f0cca4"
     },
     {
         "": "",
@@ -328,7 +368,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "8",
         "total time (min)": 400,
-        "_id": "5aaa0cd693da2631e0c0e947"
+        "decription": "Black Bolt, the enigmatic, commanding head of the Inhuman royal family and King of Attilan, possesses a voice so powerful that the slightest whisper can destroy a city. After a military coup splinters the family, the group -- which includes Black Bolt's wife, Medusa; his brother and rival, Maximus; his cousins Karnak, Gorgon and Triton; and Medusa's sister, Crystal -- barely manages to escape to Hawaii, where surprising interactions with the lush world and humanity around them may prove to not only save them, but Earth itself.",
+        "rating": "4",
+        "_id": "5aac8b2fa120571180f0cca5"
     },
     {
         "": "",
@@ -339,7 +381,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "13",
         "total time (min)": 715,
-        "_id": "5aaa0cd693da2631e0c0e948"
+        "decription": "When a tragedy puts an end to her short-lived career as a superhero, Jessica settles in New York City and opens her own detective agency, called Alias Investigations, which seems to be called into cases involving people who have special abilities. Suffering from post-traumatic stress syndrome, Jessica wants to do good, but her primary interest isn't in saving the world, it's saving her apartment and getting through each day.",
+        "rating": "8.9",
+        "_id": "5aac8b2fa120571180f0cca6"
     },
     {
         "": "",
@@ -350,7 +394,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "8",
         "total time (min)": 360,
-        "_id": "5aaa0cd693da2631e0c0e949"
+        "decription": "David Haller was diagnosed with schizophrenia at a young age and has been a patient in various psychiatric hospitals since. After Haller has an encounter with a fellow psychiatric patient, he is confronted with the possibility that there may be more to him than mental illness.",
+        "rating": "9.1",
+        "_id": "5aac8b2fa120571180f0cca7"
     },
     {
         "": "",
@@ -361,7 +407,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "13",
         "total time (min)": 715,
-        "_id": "5aaa0cd693da2631e0c0e94a"
+        "decription": "This gritty, action-packed drama follows the evolution of Luke Cage (Mike Colter), a man with super strength and unbreakable skin caused by a sabotaged experiment. Cage tries to rebuild a quiet life in Harlem, New York --until he is pulled out of the shadows and forced into a battle for his city. Along the way, Cage cannot avoid confronting his past, which he has worked hard to bury.",
+        "rating": "8.5",
+        "_id": "5aac8b2fa120571180f0cca8"
     },
     {
         "": "",
@@ -372,7 +420,9 @@ var tv = [
         "no. of seasons": "3",
         "total episodes": "39",
         "total time (min)": 1560,
-        "_id": "5aaa0cd693da2631e0c0e94b"
+        "decription": "Rip Hunter, a time-traveller, recruits a team of men and women with special abilities to stop an immortal from destroying the world.",
+        "rating": "8.4",
+        "_id": "5aac8b2fa120571180f0cca9"
     },
     {
         "": "",
@@ -383,7 +433,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "10",
         "total time (min)": 500,
-        "_id": "5aaa0cd693da2631e0c0e94c"
+        "decription": "Catching a criminal often requires the authorities to get inside the villain's mind to figure out how he thinks. That's the job of FBI agents Holden Ford and Bill Tench. They attempt to understand and catch serial killers by studying their damaged psyches. Along the way, the agents pioneer the development of modern serial-killer profiling.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0ccaa"
     },
     {
         "": "",
@@ -394,7 +446,9 @@ var tv = [
         "no. of seasons": "2",
         "total episodes": "20",
         "total time (min)": 1100,
-        "_id": "5aaa0cd693da2631e0c0e94d"
+        "decription": "Netflix chronicles the rise of the cocaine trade in Colombia and the gripping real-life stories of drug kingpins of the late '80s in this raw, gritty original series. Also detailed are the actions taken by law enforcement as they battle in the war on drugs, targeting notorious and powerful figures that include drug lord Pablo Escobar.",
+        "rating": "9.1",
+        "_id": "5aac8b2fa120571180f0ccab"
     },
     {
         "": "",
@@ -405,7 +459,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "12",
         "total time (min)": 240,
-        "_id": "5aaa0cd693da2631e0c0e94e"
+        "decription": "One-Punch Man tells the story of Saitama, an extremely overpowered superhero, who has grown bored by the absence of challenge in his fight against evil and seeks to find a worthy opponent.",
+        "rating": "8.9",
+        "_id": "5aac8b2fa120571180f0ccac"
     },
     {
         "": "*",
@@ -416,7 +472,9 @@ var tv = [
         "no. of seasons": "7",
         "total episodes": "128",
         "total time (min)": 2560,
-        "_id": "5aaa0cd693da2631e0c0e94f"
+        "decription": "Leslie Knope, a mid-level bureaucrat, wishes to help a local nurse, Ann, convert a disused construction site into a community park, but deals with red-tapeism and self-centred neighbours.",
+        "rating": "9.2",
+        "_id": "5aac8b2fa120571180f0ccad"
     },
     {
         "": "",
@@ -427,7 +485,9 @@ var tv = [
         "no. of seasons": "3",
         "total episodes": "27",
         "total time (min)": 1350,
-        "_id": "5aaa0cd693da2631e0c0e950"
+        "decription": "Vanessa Ives recruits Wild West showman Ethan Chandler and big game hunter Sir Malcolm to track down a killer that turns out to be more than human.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0ccae"
     },
     {
         "": "",
@@ -438,7 +498,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "64",
         "total time (min)": 1536,
-        "_id": "5aaa0cd693da2631e0c0e951"
+        "decription": "Brothers Edward and Alphonse Elric search for the Philsopher's Stone, hoping to restore their bodies, which were lost when they attempted to use their alchemy skills to resurrect their deceased mother.",
+        "rating": "9.1",
+        "_id": "5aac8b2fa120571180f0ccaf"
     },
     {
         "": "*",
@@ -449,7 +511,9 @@ var tv = [
         "no. of seasons": "3",
         "total episodes": "33",
         "total time (min)": 660,
-        "_id": "5aaa0cd693da2631e0c0e952"
+        "decription": "Rick is an eccentric and alcoholic mad scientist, who eschews many ordinary conventions such as school, marriage, love, and family. He frequently goes on adventures with his 14-year-old grandson, Morty, a kind but easily distressed boy, whose naive but grounded moral compass plays counterpoint to Rick's Machiavellian ego.",
+        "rating": "9.5",
+        "_id": "5aac8b2fa120571180f0ccb0"
     },
     {
         "": "",
@@ -460,7 +524,9 @@ var tv = [
         "no. of seasons": "5",
         "total episodes": "62",
         "total time (min)": 1240,
-        "_id": "5aaa0cd693da2631e0c0e953"
+        "decription": "When the evil shape-shifting wizard Aku sends the young samurai Jack into a dystopian future, he must find a portal back to his own time to undo Aku's destruction and defeat him.",
+        "rating": "9.1",
+        "_id": "5aac8b2fa120571180f0ccb1"
     },
     {
         "": "",
@@ -471,7 +537,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "8",
         "total time (min)": 400,
-        "_id": "5aaa0cd693da2631e0c0e954"
+        "decription": "James Delaney returns to England after ten years in Africa to attend his father's funeral. He investigates his father's suspicious death while trying to reclaim his family's pride.",
+        "rating": "8.8",
+        "_id": "5aac8b2fa120571180f0ccb2"
     },
     {
         "": "",
@@ -482,7 +550,9 @@ var tv = [
         "no. of seasons": "2",
         "total episodes": "16",
         "total time (min)": 880,
-        "_id": "5aaa0cd693da2631e0c0e955"
+        "decription": "In 2012, two former homicide investigators with the Louisiana State Police's Criminal Investigations Division, Rustin \"Rust\" Cohle and Martin \"Marty\" Hart, are summoned for questioning by detectives Maynard Gilbough and Thomas Papania, about the Dora Lange murder investigation of 1995; they have not seen nor spoken to each other since an altercation concerning Martin's wife Maggie Hart over a decade prior.",
+        "rating": "9.1",
+        "_id": "5aac8b2fa120571180f0ccb3"
     },
     {
         "": "",
@@ -493,7 +563,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "6",
         "total time (min)": 330,
-        "_id": "5aaa0cd693da2631e0c0e956"
+        "decription": "Hotel night porter Pine is contacted by an intelligence operative who asks for his assistance to spy on international businessman Richard Roper. The entrepreneur is believed to have forged a criminal alliance between the secret arms trade and the intelligence community, prompting the need for surveillance. Pine attempts to infiltrate Roper's inner circle by becoming a felon himself, while keeping his mission a secret from his hotel colleagues and girlfriend.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0ccb4"
     },
     {
         "": "",
@@ -504,7 +576,9 @@ var tv = [
         "no. of seasons": "3",
         "total episodes": "35",
         "total time (min)": 1750,
-        "_id": "5aaa0cd693da2631e0c0e957"
+        "decription": "A crime drama mixed with healthy doses of the surreal, this series is about FBI Agent Dale Cooper, who travels to the small logging town of Twin Peaks to solve the murder of seemingly innocent high schooler Laura Palmer. Almost nothing is as it seems, however, and the show's sometimes eerie visuals, oddball characters and wild dream sequences drive the point home.",
+        "rating": "9.1",
+        "_id": "5aac8b2fa120571180f0ccb5"
     },
     {
         "": "",
@@ -515,7 +589,9 @@ var tv = [
         "no. of seasons": "6",
         "total episodes": "110",
         "total time (min)": 2200,
-        "_id": "5aaa0cd693da2631e0c0e958"
+        "decription": "A lawyer, whose law degree has been revoked, is compelled to join the Greendale Community College. Students of diverse temperaments join his study group which leads to quirky and memorable encounters.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0ccb6"
     },
     {
         "": "",
@@ -526,7 +602,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "24",
         "total time (min)": 480,
-        "_id": "5aaa0cd693da2631e0c0e959"
+        "decription": "Parasyte centers on a male 17-year-old high school student named Shinichi Izumi, who lives with his mother and father in a quiet neighborhood in Tokyo, Japan. One night, strange worm-like creatures with drills as a 'head' called Parasytes appear on Earth, taking over the brains of human hosts by entering through their ears or noses.",
+        "rating": "8",
+        "_id": "5aac8b2fa120571180f0ccb7"
     },
     {
         "": "",
@@ -537,7 +615,9 @@ var tv = [
         "no. of seasons": "2",
         "total episodes": "46",
         "total time (min)": 920,
-        "_id": "5aaa0cd693da2631e0c0e95a"
+        "decription": "The story follows the main character Tomoya Okazaki, a discontent high school student whose life changes when he meets a girl one year older than he is, named Nagisa Furukawa.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0ccb8"
     },
     {
         "": "",
@@ -548,7 +628,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "74",
         "total time (min)": 1480,
-        "_id": "5aaa0cd693da2631e0c0e95b"
+        "decription": "The story revolves around Kenzō Tenma, a Japanese surgeon living in Germany whose life enters turmoil after getting himself involved with Johan Liebert, one of his former patients who is revealed to be a dangerous psychopath.",
+        "rating": "9.1",
+        "_id": "5aac8b2fa120571180f0ccb9"
     },
     {
         "": "*",
@@ -559,7 +641,9 @@ var tv = [
         "no. of seasons": "2",
         "total episodes": "16",
         "total time (min)": 800,
-        "_id": "5aaa0cd693da2631e0c0e95c"
+        "decription": "When Joyce's 12-year-old son, Will, goes missing, she launches a terrifying investigation into his disappearance with local authorities. As they search for answers, they unravel a series of extraordinary mysteries involving secret government experiments, unnerving supernatural forces, and a very unusual little girl.",
+        "rating": "9.2",
+        "_id": "5aac8b2fa120571180f0ccba"
     },
     {
         "": "*",
@@ -570,7 +654,9 @@ var tv = [
         "no. of seasons": "4",
         "total episodes": "13",
         "total time (min)": 1170,
-        "_id": "5aaa0cd693da2631e0c0e95d"
+        "decription": "Dr. Watson, a former army doctor, finds himself sharing a flat with Sherlock Holmes, an eccentric individual with a knack for solving crimes. Together, they take on the most unusual cases.",
+        "rating": "9.7",
+        "_id": "5aac8b2fa120571180f0ccbb"
     },
     {
         "": "",
@@ -581,7 +667,9 @@ var tv = [
         "no. of seasons": "2",
         "total episodes": "20",
         "total time (min)": 1200,
-        "_id": "5aaa0cd693da2631e0c0e95e"
+        "decription": "The series begins with an inside look at the early reign of the queen, who ascended the throne at age 25 after the death of her father, King George VI. As the decades pass, personal intrigues, romances, and political rivalries are revealed that played a big role in events that shaped the later years of the 20th century.",
+        "rating": "9.3",
+        "_id": "5aac8b2fa120571180f0ccbc"
     },
     {
         "": "",
@@ -592,7 +680,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "8",
         "total time (min)": 480,
-        "_id": "5aaa0cd693da2631e0c0e95f"
+        "decription": "Four of Marvel's biggest heroes are each working individually but have one common goal in mind -- to save New York City. Burdened with their own personal challenges, Matt Murdock (Daredevil), Jessica Jones, Luke Cage and Danny Rand (Iron Fist) realize that they likely won't be able to accomplish their goals working solo.",
+        "rating": "8.8",
+        "_id": "5aac8b2fa120571180f0ccbd"
     },
     {
         "": "",
@@ -603,7 +693,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "8",
         "total time (min)": 200,
-        "_id": "5aaa0cd693da2631e0c0e960"
+        "decription": "The programme jointly follows James (Alex Lawther), a 17-year-old who believes himself to be a psychopath, and Alyssa (Jessica Barden), a rebellious classmate who sees in James a chance to escape from her tumultuous home life.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0ccbe"
     },
     {
         "": "",
@@ -614,7 +706,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "13",
         "total time (min)": 715,
-        "_id": "5aaa0cd693da2631e0c0e961"
+        "decription": "After exacting revenge on the people responsible for the deaths of his wife and children, Frank Castle uncovers a conspiracy that runs deeper than New York's criminal underworld. Now known as the Punisher, he must dig deep into the conspiracy to discover the truth about injustices that affect more than just him and his family.",
+        "rating": "9.1",
+        "_id": "5aac8b2fa120571180f0ccbf"
     },
     {
         "": "",
@@ -625,7 +719,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "10",
         "total time (min)": 500,
-        "_id": "5aaa0cd693da2631e0c0e962"
+        "decription": "There are times when pretty much every teenager thinks his or her parents are evil -- but what if it was actually true? That's the situation six Los Angeles teenagers find themselves in when they stumble upon a terrible secret and realize that their parents have been lying to them for their entire lives.",
+        "rating": "7.5",
+        "_id": "5aac8b2fa120571180f0ccc0"
     },
     {
         "": "",
@@ -636,7 +732,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "6",
         "total time (min)": 150,
-        "_id": "5aaa0cd693da2631e0c0e963"
+        "decription": "In a world where superheroes and villains have been real for decades, Arthur, an unassuming accountant with no superpowers, becomes embroiled in the middle of the battle between good and evil. When he realizes that his city is owned by a global supervillain who was long thought to be dead, he struggles to uncover the conspiracy.",
+        "rating": "8.7",
+        "_id": "5aac8b2fa120571180f0ccc1"
     },
     {
         "": "*",
@@ -647,7 +745,9 @@ var tv = [
         "no. of seasons": "3",
         "total episodes": "28",
         "total time (min)": 1680,
-        "_id": "5aaa0cd693da2631e0c0e964"
+        "decription": "Some residents mysteriously disappear from Mapleton, New York. The groups of people, who are left behind, try to rebuild their lives after losing their close family members.",
+        "rating": "9.5",
+        "_id": "5aac8b2fa120571180f0ccc2"
     },
     {
         "": "",
@@ -658,7 +758,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "8",
         "total time (min)": 430,
-        "_id": "5aaa0cd693da2631e0c0e965"
+        "decription": "Brit Marling also plays the role Prairie Johnson, a young woman who returns home after a 7-year disappearance. Her sudden return is not the only miraculous occurrence: everyone is shocked to learn that Prairie is no longer blind. While the FBI and her parents are anxious to discuss Prairie's disappearance, she won't talk about what happened during the time that she was missing.",
+        "rating": "8.9",
+        "_id": "5aac8b2fa120571180f0ccc3"
     },
     {
         "": "",
@@ -669,7 +771,9 @@ var tv = [
         "no. of seasons": "2",
         "total episodes": "20",
         "total time (min)": 1200,
-        "_id": "5aaa0cd693da2631e0c0e966"
+        "decription": "This series takes a look at what the world might look like had the outcome of World War II turned out differently. In this dystopian scenario, the Axis powers won the war, leading to the United States being divided into three parts, an area controlled by the Japanese, a Nazi-controlled section, and a buffer zone between the two.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0ccc4"
     },
     {
         "": "",
@@ -680,7 +784,9 @@ var tv = [
         "no. of seasons": "4",
         "total episodes": "92",
         "total time (min)": 3680,
-        "_id": "5aaa0cd693da2631e0c0e967"
+        "decription": "Barry Allen, a forensic scientist with the Central City police force, is struck by lightning in a freak accident. When he wakes up after nine months, he discovers that he can achieve great speeds.",
+        "rating": "8",
+        "_id": "5aac8b2fa120571180f0ccc5"
     },
     {
         "": "",
@@ -691,7 +797,9 @@ var tv = [
         "no. of seasons": "3",
         "total episodes": "39",
         "total time (min)": 1560,
-        "_id": "5aaa0cd693da2631e0c0e968"
+        "decription": "Will Graham, an FBI criminal profiler, has an uncanny ability to sympathise with Dr Hannibal Lecter, a forensic psychiatrist. However, he is unaware that he is a cannibal.",
+        "rating": "9.1",
+        "_id": "5aac8b2fa120571180f0ccc6"
     },
     {
         "": "",
@@ -702,7 +810,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "25",
         "total time (min)": 500,
-        "_id": "5aaa0cd693da2631e0c0e969"
+        "decription": "The story follows Light Yagami, a high school student who discovers a supernatural notebook from a Shinigami named Ryuk that grants its user the ability to kill anyone whose name and face he knows. The series centers around Light's attempts to create and rule a world \"cleansed of evil\" as what he calls \"the god of the new world\" using the notebook, and the efforts of a detective known as L to stop him.",
+        "rating": "8.8",
+        "_id": "5aac8b2fa120571180f0ccc7"
     },
     {
         "": "",
@@ -713,7 +823,9 @@ var tv = [
         "no. of seasons": "11",
         "total episodes": "264",
         "total time (min)": 5280,
-        "_id": "5aaa0cd693da2631e0c0e96a"
+        "decription": "The lives of socially awkward physicists Leonard Hofstadter and Sheldon Cooper take a wild turn when the beautiful and free-spirited Penny moves in next door.",
+        "rating": "7",
+        "_id": "5aac8b2fa120571180f0ccc8"
     },
     {
         "": "",
@@ -724,7 +836,9 @@ var tv = [
         "no. of seasons": "4",
         "total episodes": "16",
         "total time (min)": 880,
-        "_id": "5aaa0cd693da2631e0c0e96b"
+        "decription": "An emotional police detective is separated from his wife. He is torn between wanting to solve serial murders and attempting to rekindle his marriage.",
+        "rating": "8.9",
+        "_id": "5aac8b2fa120571180f0ccc9"
     },
     {
         "": "",
@@ -735,7 +849,9 @@ var tv = [
         "no. of seasons": "3",
         "total episodes": "30",
         "total time (min)": 1650,
-        "_id": "5aaa0cd693da2631e0c0e96c"
+        "decription": "Elliot, a cyber-security engineer suffering from anxiety, works for a corporation and hacks felons by night. Panic strikes him after a cryptic anarchist recruits him to destroy the same corporation.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0ccca"
     },
     {
         "": "*",
@@ -746,7 +862,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "10",
         "total time (min)": 550,
-        "_id": "5aaa0cd693da2631e0c0e96d"
+        "decription": "In a futuristic Western-themed amusement park, Westworld, the visitors interact with automatons. However, all hell breaks loose when the automatons begin malfunctioning.",
+        "rating": "9.6",
+        "_id": "5aac8b2fa120571180f0cccb"
     },
     {
         "": "",
@@ -757,7 +875,9 @@ var tv = [
         "no. of seasons": "2",
         "total episodes": "16",
         "total time (min)": 640,
-        "_id": "5aaa0cd693da2631e0c0e96e"
+        "decription": "Life changes for Peggy Carter after her boyfriend Steve Rogers is feared dead. Now she leads a dual life by doing administrative work as well as working as a S.H.I.E.L.D. agent under Howard Stark.",
+        "rating": "8.8",
+        "_id": "5aac8b2fa120571180f0cccc"
     },
     {
         "": "*",
@@ -768,7 +888,9 @@ var tv = [
         "no. of seasons": "8",
         "total episodes": "73",
         "total time (min)": 4015,
-        "_id": "5aaa0cd693da2631e0c0e96f"
+        "decription": "Several royal families desire the Iron Throne to gain control of Westeros. Whilst kingdoms fight each other for power, a sinister force lurks beyond the Wall in the north.",
+        "rating": "9.9",
+        "_id": "5aac8b2fa120571180f0cccd"
     },
     {
         "": "",
@@ -779,7 +901,9 @@ var tv = [
         "no. of seasons": "3",
         "total episodes": "39",
         "total time (min)": 780,
-        "_id": "5aaa0cd693da2631e0c0e970"
+        "decription": "Rescued after 15 years in a cult, Kimmy Schmidt decides to reclaim her life by venturing to New York, where she experiences everyday life with wide-eyed enthusiasm.",
+        "rating": "8.8",
+        "_id": "5aac8b2fa120571180f0ccce"
     },
     {
         "": "",
@@ -790,7 +914,9 @@ var tv = [
         "no. of seasons": "2",
         "total episodes": "48",
         "total time (min)": 960,
-        "_id": "5aaa0cd693da2631e0c0e971"
+        "decription": "Set in an alternate timeline, the series focuses on how the former prince Lelouch vi Britannia obtains a power known as Geass and decides to use it to obliterate the Holy Britannian Empire, a superpower that has been conquering various countries.",
+        "rating": "8.9",
+        "_id": "5aac8b2fa120571180f0cccf"
     },
     {
         "": "",
@@ -801,7 +927,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "16",
         "total time (min)": 320,
-        "_id": "5aaa0cd693da2631e0c0e972"
+        "decription": "It focuses on various people, including alchemists, thieves, thugs, Mafiosi and Camorristi, who are unconnected to one another. After an immortality elixir is recreated in 1930 Manhattan, the characters begin to cross paths, setting off events that spiral further and further out of control.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0ccd0"
     },
     {
         "": "",
@@ -812,7 +940,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "12",
         "total time (min)": 240,
-        "_id": "5aaa0cd693da2631e0c0e973"
+        "decription": "The story follows Satoru Fujinuma, a young man who somehow possesses an ability known as \"Revival\" that sends him back in time moments before a life-threatening incident, allowing him to prevent it from happening again.",
+        "rating": "8.9",
+        "_id": "5aac8b2fa120571180f0ccd1"
     },
     {
         "": "",
@@ -823,7 +953,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "8",
         "total time (min)": 440,
-        "_id": "5aaa0cd693da2631e0c0e974"
+        "decription": "11/22/63 is a novel by Stephen King about a time traveler who attempts to prevent the assassination of President John F. Kennedy, which occurred on November 22, 1963.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0ccd2"
     },
     {
         "": "",
@@ -834,7 +966,9 @@ var tv = [
         "no. of seasons": "5",
         "total episodes": "65",
         "total time (min)": 3575,
-        "_id": "5aaa0cd693da2631e0c0e975"
+        "decription": "Frank Underwood is a Democrat appointed as the secretary of state. Along with his wife, he sets out on a quest to seek revenge on the people who betrayed him while successfully rising to supremacy.",
+        "rating": "9.2",
+        "_id": "5aac8b2fa120571180f0ccd3"
     },
     {
         "": "",
@@ -845,7 +979,9 @@ var tv = [
         "no. of seasons": "4",
         "total episodes": "60",
         "total time (min)": 2400,
-        "_id": "5aaa0cd693da2631e0c0e976"
+        "decription": "Annalise Keating is a prominent criminal defense attorney and law professor at Middleton University in Philadelphia. She selects five of her first year students to intern at her firm: Wes Gibbins, Connor Walsh, Michaela Pratt, Asher Millstone, and Laurel Castillo (The Keating 5).",
+        "rating": "9.3",
+        "_id": "5aac8b2fa120571180f0ccd4"
     },
     {
         "": "",
@@ -856,7 +992,9 @@ var tv = [
         "no. of seasons": "2",
         "total episodes": "23",
         "total time (min)": 920,
-        "_id": "5aaa0cd693da2631e0c0e977"
+        "decription": "Fulfilling a promise to his deceased father, one-time outlaw Jesse Custer returns home to West Texas to take over his dad's church. Jesse's mission, however, becomes twisted when his body is overcome by a cryptic force that unleashes within him a highly unconventional power.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0ccd5"
     },
     {
         "": "",
@@ -867,8 +1005,9 @@ var tv = [
         "no. of seasons": "1",
         "total episodes": "13",
         "total time (min)": 650,
-        "_id": "5aaa0cd693da2631e0c0e978"
+        "decription": "With their days numbered, a group of people struggle with the inevitable apocalypse after it is discovered that a comet is on a collision course with Earth.",
+        "rating": "9",
+        "_id": "5aac8b2fa120571180f0ccd6"
     }
 ]
-
 

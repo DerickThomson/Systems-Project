@@ -40,7 +40,7 @@ body{
     font-family: 'Questrial', sans-serif;
     font-size: 30px;
     width: 65%;
-    color:rgba(255,255,255,0.5);
+    color:rgba(255,255,255,0.8);
 }
 #val{
     text-align: right;
@@ -53,9 +53,12 @@ body{
     border-bottom-color: rgb(208,178,117);
 }
 #val::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #f8f8ff;
+    color:rgba(208,178,117,0,5);
     font-family: 'Questrial', sans-serif;
-    opacity: 0.5;
+}
+#val::-webkit-input-placeholder {
+    color:rgba(208,178,117,0.5);
+    font-family: 'Questrial', sans-serif;
 }
 #val:focus{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -74,7 +77,7 @@ button:focus {
 button{
     font-family: 'Questrial', sans-serif;
     background-color: rgba(0,0,0,0);
-    color: rgba(255,255,255,.4);
+    color: rgba(208,178,117,0.5);;
     border: none;
     width: 120px;
     height: 55px;
@@ -89,6 +92,7 @@ button{
 }
 button:hover{
     background-color: rgb(208,178,117);
+    color: rgba(255,255,255,0.4);
 }
 
 @media only screen and (max-width: 1000px) {
